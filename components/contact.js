@@ -1,0 +1,4 @@
+'use client';
+import { useState } from 'react';
+import { api } from '@/lib/api';
+export default function Contact(){const [message,setMessage]=useState('');const [busy,setBusy]=useState(false);return <form className="customer-form" onSubmit={async e=>{e.preventDefault();const form=e.currentTarget;setBusy(true);try{const data=await api('/contact',{method:'POST',body:JSON.stringify(Object.fromEntries(new FormData(form)))});setMessage(data.message);form.reset();}catch(e){setMessage(e.message);}finally{setBusy(false);}}}><label>Your name<input name="name" required maxLength={120}/></label><label>Email address<input type="email" name="email" required maxLength={200}/></label><label>How can we help?<textarea name="message" rows={6} required minLength={10} maxLength={5000}/></label><button className="button" disabled={busy}>{busy?'Sending…':'Send your message →'}</button><p role="status">{message}</p></form>;}

@@ -1,0 +1,1 @@
+export default function Loading(){return <div className="page-wrap" role="status"><p>Getting the good things ready…</p><div className="product-grid">{[1,2,3].map(i=><div key={i} className="skeleton"/>)}</div></div>;}
